@@ -2,7 +2,6 @@ Functions:
 =========
 MaxValue                  Builds groups of means, according to the method of Scott & Knott
 plot.SK                   Plot SK object
-plot.SK.nest              Plot SK.nest object
 SK                        Main function S3 based
 SK.aov                    S3 method for aov object
 SK.aovlist                S3 method for aovlist object

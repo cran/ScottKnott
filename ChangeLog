@@ -1,0 +1,9 @@
+2010-03-28 vs. 1.1.0 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
+
+  * The classes SK and SK.nest have been simplified
+  * The S3 method to plot Sk and SK.nest objects was enhanced
+	  
+2009-01-23  vs. 1.0.0 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
+
+  * Released to CRAN
+

@@ -27,9 +27,9 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
   # the first element of this vector is the value of k1 which maximizes sqsum (SKBSQS)
   ord1 <- order(sqsum, decreasing=TRUE)[1]
   # the maximum value of the between groups sum of squares
-  b0 <- max(sqsum)
+  b0   <- max(sqsum)
   si02 <- (1/((g-k+1)+dfr))*(sum((means[k:g]-mean(means[k:g]))^2)+dfr*mMSE)
-  lam <- (pi/(2*(pi-2)))*b0/si02
+  lam  <- (pi/(2*(pi-2)))*b0/si02
   valchisq <- qchisq((sig.level), lower.tail=FALSE, df=(g-k+1)/(pi-2))
   # if true it returns one node to the right if false it goes forward one node to the left
   if((lam < valchisq) | (ord1 == k)){
@@ -61,7 +61,7 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
     }
     while(k == g){
       # there was just one mean left to the right, so it becomes a group
-      ngroup <- ngroup + 1
+      ngroup   <- ngroup + 1
       group[g] <- ngroup
 
     if(prod(group) > 0)
@@ -72,7 +72,7 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
     # the group of just one mean group had already been formed, a further
     # jump to the right and another check whether there was just one mean
     #left to the right
-      k <- g+1
+      k <- g + 1
       g <- markg[g]
     }
   } else {

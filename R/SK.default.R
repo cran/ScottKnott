@@ -2,7 +2,8 @@
 ## S3 method to design matrix and response variable or data.frame objects
 ##
 
-SK.default <- function(x, y=NULL, model, which, error, sig.level=.05, ...)
+SK.default <- function(x, y=NULL, model, which, id.trim=3, error,
+                sig.level=.05, ...)
 {
   if (is.data.frame(y)) 
     y <- as.matrix(y[, 1])  # manova is not contemplated
@@ -14,11 +15,11 @@ SK.default <- function(x, y=NULL, model, which, error, sig.level=.05, ...)
     dat <- as.data.frame(cbind(x, y))
   else
     dat <- x
-  av <- eval(substitute(aov(fo, dat), list(fo = formula(model))))
-  #av <- do.call(aov, list(as.formula(as.character(model)), data = substitute(x)))
- if(class(av)[1]=='aov')
-   res <- SK.aov(av, which=which, sig.level=sig.level)
+  av <- eval(substitute(aov(fo, dat), list(fo=formula(model))))
+ if(class(av)[1] == 'aov')
+   res <- SK.aov(x=av, which=which, id.trim=id.trim, sig.level=sig.level)
  else
-   res <- SK.aovlist(av, which=which, error=error, sig.level=sig.level)
+   res <- SK.aovlist(x=av, which=which, id.trim=id.trim, error=error,
+            sig.level=sig.level)
   invisible(res)
 }

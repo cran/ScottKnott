@@ -76,59 +76,43 @@
 
 \examples{
   ##
-  ## Generating data
+  ## Examples: Completely Randomized Design (CRD)
   ##
-  x <- gl(4, 6, label=c('A', 'B', 'C', 'D'))
-  r   <- rep(1:6, 4)
-  y <- c(58, 49, 51, 56, 50, 48,
-         60, 55, 66, 61, 54, 61,
-         59, 47, 44, 49, 62, 60,
-         45, 33, 34, 48, 42, 44)
-  dfm <- data.frame(x, r, y)
-  
-  # Completely Randomized Design (CRD)
-  av      <- aov(y ~ x, data=dfm)       # Doing a ANOVA
-  mm      <- model.tables(av, "means")  # summary tables for model fits
-  tabs    <- mm$tables[-1]              # all model means
+
+  data(CRD1)
+
+  av      <- with(CRD1, aov(y ~ x, data=dfm)) # Doing an ANOVA
+  mm      <- model.tables(av, "means")        # summary tables for model fits
+  tabs    <- mm$tables[-1]                    # all model means
   which   <- names(av$model)[2]
-  tabs    <- tabs[which]                # specified group means
-  nn      <- mm$n[names(tabs)]          # repetions number of specified groups
+  tabs    <- tabs[which]                      # specified group means
+  nn      <- mm$n[names(tabs)]                # repetions number of specified groups
   MSE     <- sum(resid(av)^2)/av$df.residual
-  tab     <- tabs[[which]]              # tab=means
+  tab     <- tabs[[which]]                    # tab=means
   means   <- as.vector(tab)
-  mnumber <- length(means)              # number of means
+  mnumber <- length(means)                    # number of means
   nms     <- names(tab)
-  r       <- nn[[which]]                # groups and its number of replicates
+  r       <- nn[[which]]                      # groups and its number of replicates
   ord     <- order(means, decreasing=TRUE)
   mMSE    <- MSE/r
-  dfr     <- av$df.residual             # residual degrees of freedom
-  means   <- means[ord]                 # decreasing ordered means
+  dfr     <- av$df.residual                   # residual degrees of freedom
+  means   <- means[ord]                       # decreasing ordered means
   g       <- mnumber
 
-  ##
   ## Grouping the means: sig.level=.05
-  ##
   groups  <- MaxValue(g, means, mMSE, dfr, sig.level=.05, 1, rep(0, g), 0,
                rep(0, g))
 
-  ##
   ## The result: sig.level=.05
-  ##
   groups
-  str(groups)
 
 
-  ##
   ## Grouping the means: sig.level=.10
-  ##
   groups  <- MaxValue(g, means, mMSE, dfr, sig.level=.10, 1, rep(0, g), 0,
 	             rep(0, g))
 
-  ##
   ## The result: sig.level=.10
-  ##
   groups
-  str(groups)
 }
 
 \keyword{package}

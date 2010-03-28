@@ -1,37 +1,48 @@
 \name{plot.SK}
 \alias{plot.SK}
-\alias{plot.SK.nest}
 
 \title{
   Plot SK and SK.nest Objects
 }
 
 \description{
-  Those are S3 methods for objects of class \code{SK} and \code{SK.nest}.
+  S3 method to plot \code{SK} and \code{SK.nest} objects.
 }
 
 \usage{
-  \method{plot}{SK}(x, inches=TRUE, col=NULL, xlab=NULL, ylab=NULL,
-    title="Groups of means divided by colors", \dots)
-  \method{plot}{SK.nest}(x, inches=TRUE, col=NULL, xlab=NULL, ylab=NULL,
-    title="Groups of means divided by colors", \dots)
+  \method{plot}{SK}(x, pch=19, col=NULL,
+    xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+    id.lab=NULL, id.las=1, id.col=TRUE,
+    rl=TRUE, rl.lty=3, rl.col='gray',
+    mm=TRUE, mm.lty=1, 
+    title="Means grouped by color(s)", \dots)
 }
 
 \arguments{
-  \item{x}{A \code{SK} or \code{SK.nest} object.}
-  \item{inches}{'TRUE', 'FALSE' or a positive number.See symbols-package:graghics}
-  \item{col}{A vector of colors for the thermometers representation. See symbols-package:graghics.}
+  \item{x}{A \code{SK} object.}
+  \item{pch}{A vector of plotting symbols or characters.}
+  \item{col}{A vector of colors for the means representation.}
   \item{xlab}{A label for the x axis.}
   \item{ylab}{A label for the y axis.}
-  \item{title}{A title for the graphics.}
-  \item{\dots}{Other graphical parameters may also be passed as arguments to
-    this function.}
-}
+  \item{xlim}{The x limits of the plot}.
+  \item{ylim}{The y limits of the plot.}
+  \item{id.lab}{Factor level names at x-axis.}
+  \item{id.las}{Factor level names written either horizontally or vertically.}
+  \item{id.col}{A logical value. If TRUE (the default), the \code{col} parameter will be used for the x axis.}
+  \item{rl}{Horizontal line connecting the circle to the y-axis.}
+  \item{rl.lty}{Line type of rl.}
+  \item{rl.col}{Line color of rl.}
+  \item{mm}{Vertical line through the circle (mean value) linking the minimum to the maximum of the factor level values corresponding to that mean value.}
+  \item{mm.lty}{Line type of mm.}
+  \item{title}{A title for the plot.}
+  \item{\dots}{Optional plotting parameters.}
+} 
 
 \details{
-	The \code{plot.SK} and \code{plot.SK.nest} functions generates a series of
-  thermometers where the means are marked by a line in the midle, and the
-  groups are diferentiated by diferent colors.
+	The \code{plot.SK} function is a S3 method to plot \code{SK} and
+  \code{SK.nest} objetcs. It generates a serie of points (the means) and a 
+  vertical line showing the minimum e maximum of the values corresponding to
+  each group mean. The groups are diferentiated by colors.
 }
 
 \author{
@@ -48,51 +59,34 @@
 
 \examples{
   ##
-  ## Example: Factorial Experiment (FE)
+  ## Examples: Completely Randomized Design (CRD)
+  ## More details: demo(package='ScottKnott')
   ##
 
-  yeld <- c(53, 27, 40, 45, 43, 45, 32, 12,
-            45, 57, 29, 69, 42, 32, 61, 54,
-            95, 27, 24, 60, 60, 98, 11, 26)
-  labs     <- factor(rep(1:2, 12))
-  runs     <- factor(sort(rep(1:12, 2)))
-  pressure <- gl(2, 12)
-  catalyst <- factor(rep(sort(rep(1:2, 2)), 6))
-  dm       <- data.frame(pressure, catalyst, labs) # Design matrix (a data.frame object)
-  dfm      <- data.frame(labs, pressure, catalyst, yeld)
+  library(ScottKnott)
+  data(CRD2)
 
-  ## PARAMETERS ARE THE DESIGN MATRIX AND THE RESPONSE VARIABLE
-  ## MAIN FACTOR ANALYSIS
-  ## Main factor = catalyst
-  sk1 <- SK(x=dm, y=yeld, model='yeld ~ labs * catalyst * pressure',
-            which='catalyst')
-  summary(sk1)
-  plot(sk1, title='catalyst')
+  ## From: vectors x and y
+  sk1 <- with(CRD2, SK(x=x, y=y, model='y ~ x', which='x', id.trim=5))
+  plot(sk1, id.las=2, rl=FALSE, title='Factor levels', sig.level=.05)
 
-  ## Main factor = pressure
-  sk2 <- SK(x=dm, y=yeld, model='yeld ~ labs * catalyst * pressure',
-            which='pressure')
-  summary(sk2)
-  plot(sk2, title='pressure')
+  ## From: design matrix (dm) and response variable (y)
+  sk2 <- with(CRD2, SK(x=dm, y=y, model='y ~ x', which='x', sig.level=0.005,
+    id.trim=5))
+  plot(sk2, col=rainbow(max(sk2$groups)), mm.lty=3, id.las=2, rl=FALSE,
+    title='Factor levels', sig.level=0.005, )
 
-  ## NESTED ANALYSIS
-  ## Nested catalyst/pressure=1 -> SK.nest
-  nsk1 <- SK.nest(x=dm, y=yeld, model='yeld ~ labs * catalyst * pressure',
-                  which='catalyst:pressure', fl2=1)
-  summary(nsk1)
-  plot(nsk1, title='catalyst/pressure=1')
+  ## From: data.frame (dfm)
+  sk3 <- with(CRD2, SK(x=dfm, model='y ~ x', which='x', id.trim=5))
+  plot(sk3, col=rainbow(max(sk3$groups)), id.las=2, id.col=FALSE, rl=FALSE)
 
-  ## Nested catalyst/pressure=2 -> SK.nest
-  nsk2 <- SK.nest(x=dm, y=yeld, model='yeld ~ labs * catalyst * pressure',
-                  which='catalyst:pressure', fl2=2)
-  summary(nsk2)
-  plot(nsk2, title = 'catalyst/pressure=2')
+  ## From: aov
+  av <- with(CRD2, aov(y ~ x , data = dfm))
+  summary(av)
 
-  ## Nested catalyst/pressure=2/labs=1 -> SK.nest
-  nsk3 <- SK.nest(x=dm, y=yeld, model='yeld ~ labs * catalyst * pressure',
-                  which='labs:catalyst:pressure', fl2=2, fl3=1)
-  summary(nsk3)
-  plot(nsk3, title='catalyst/pressure=2/labs=1')
+  sk4 <- with(CRD2, SK(x=av, which='x', id.trim=5))
+  plot(sk4, col=rainbow(max(sk4$groups)), rl=FALSE, id.las=2, id.col=FALSE,
+    title=NULL)
 }
 
 \keyword{package}

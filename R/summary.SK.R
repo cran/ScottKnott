@@ -14,9 +14,9 @@ summary.SK <- function(object, ...)
   xgroups <- seq(ngroups)
   for (i in 1:ngroups)
     object$groups[object$groups == xgroups[i]] <- groupletter[i]
-  out <- data.frame(object$nms[object$ord], object$ord, object$means,
+  out <- data.frame(rownames(object$m.inf), object$m.inf[, 1],
            object$groups)
-  names(out) <- c('NAMES', 'GROUPS', 'MEANS',
-    paste('COMPARISON ', 100*object$sig.level, '%', sep=''))
-  return(out)
+  names(out) <- c('Levels', 'Means', paste('SK(', 100*object$sig.level,
+                  '%)', sep=''))
+  print(out, row.names=FALSE)
 }

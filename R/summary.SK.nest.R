@@ -14,12 +14,12 @@ summary.SK.nest <- function(object, ...)
   xgroups <- seq(ngroups)
   for(i in 1 : ngroups)
     object$groups[object$groups == xgroups[i]] <- groupletter[i]
-  out <- data.frame(object$nms[object$ord], object$ord, object$means,
+  out <- data.frame(rownames(object$m.inf), object$m.inf[, 1],
            object$groups)
-  names(out) <- c('NAMES', 'GROUPS', 'MEANS',
-  paste('COMPARISON ', 100*object$sig.level, '%', sep=''))
+  names(out) <- c('Levels', 'Means', paste('SK(', 100*object$sig.level, '%)',
+                  sep=''))
   if(class(object$av)[1]=='aovlist'){
-    if(object$fl3==0){
+    if(object$fl3 == 0){
       cat('Factor:', names(dimnames(object$tab)[1]), 'for level =',
           dimnames(object$tab)[[2]][object$fl2], 'of factor:',
           names(dimnames(object$tab)[2]), '\n')
@@ -31,7 +31,7 @@ summary.SK.nest <- function(object, ...)
         'of factor:', names(dimnames(object$tab)[3]), '\n')
     }
   } else {
-    if(object$fl3==0){
+    if(object$fl3 == 0){
       cat('Factor:', names(dimnames(object$tab)[1]), 'for level =',
           dimnames(object$tab)[[2]][object$fl2], 'of factor:',
           names(dimnames(object$tab)[2]), '\n')
@@ -43,5 +43,5 @@ summary.SK.nest <- function(object, ...)
           'of factor:', names(dimnames(object$tab)[3]), '\n')
     }
   }
-  return(out)
+  print(out, row.names=FALSE)
 }

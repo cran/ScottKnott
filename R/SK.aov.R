@@ -2,31 +2,38 @@
 ## S3 method to 'aov' object
 ##
 
-SK.aov <- function(x, which=NULL, sig.level=.05, ...)
+SK.aov <- function(x, which=NULL, id.trim=3, sig.level=.05, ...)   
 {
-  mm      <- model.tables(x, "means")  # summary tables for model fits
-  if(is.null(mm$n)) stop("No factors in the fitted model!")
-  tabs    <- mm$tables[-1]             # all model means
   if(is.null(which))
     which <- names(x$model)[2]
-  tabs    <- tabs[which]               # specified group means
-  nn      <- mm$n[names(tabs)]         # repetions number of specified groups
-  MSE     <- sum(resid(x)^2)/x$df.residual
-  tab     <- tabs[[which]]             # tab=means
-  means   <- as.vector(tab)
-  mnumber <- length(means)             # number of means
-  nms     <- names(tab)
-  r       <- nn[[which]]               # groups and its number of replicates
-  ord     <- order(means, decreasing=TRUE)
-  mMSE    <- MSE/r
-  dfr     <- x$df.residual             # residual degrees of freedom
-  gm      <- mm$tables[[1]]            # grand mean
-  means   <- means[ord]                # decreasing ordered means
-  g       <- mnumber
-  groups  <- MaxValue(g, means, mMSE, dfr, sig.level=sig.level, 1, rep(0, g), 0,
-               rep(0, g))
-  res     <- list(av=x, groups=groups, nms=nms, ord=ord, means=means,
-               sig.level=sig.level, mnumber=mnumber, r=r, which=which)
-  class(res) <- 'SK'
+  mt <- model.tables(x, "means")      # summary tables for model fits
+  if(is.null(mt$n))
+    stop("No factors in the fitted model!")
+  tabs  <- mt$tables[-1][which]       # specified group means
+  r     <- mt$n[names(tabs)][[which]] # groups and its number of replicates
+  MSE   <- sum(resid(x)^2) /
+             x$df.residual
+  tab   <- tabs[[which]]              # tab=means
+  m     <- as.vector(tab)             # means
+  nms   <- names(tab)
+  ord   <- order(m, decreasing=TRUE)
+  l     <- nlevels(x$model[, which])
+  m.inf <- matrix(nrow=l, ncol=3)
+  for(i in 1:l) { 
+    v <- x$model[, 1][x$model[, which] == levels(x$model[, which])[i]]
+    m.inf[i, 1] <- mean(v)
+    m.inf[i, 2] <- min(v)
+    m.inf[i, 3] <- max(v)  
+  } 
+  m.inf  <- cbind(m.inf[, 1][ord], m.inf[, 2][ord], m.inf[, 3][ord])   
+  dimnames(m.inf) <- list(strtrim(nms[ord], id.trim), c('mean', 'min', 'max'))
+  mMSE   <- MSE / r
+  dfr    <- x$df.residual             # residual degrees of freedom
+  g      <- nrow(m.inf)
+  groups <- MaxValue(g, m.inf[, 1], mMSE, dfr, sig.level=sig.level, 1,
+              rep(0, g), 0, rep(0, g))
+  res    <- list(av=x, groups=groups, nms=nms, ord=ord, m.inf=m.inf,
+              sig.level=sig.level)
+  class(res) <- c('SK', 'list')
   invisible(res)
 }
