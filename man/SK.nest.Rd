@@ -69,10 +69,10 @@
 }
 
 \references{
-  Ramalho MAP, Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
+  Ramalho M.A.P., Ferreira D.F., Oliveira A.C. 2000. \emph{Experimentacao em Genetica
   e Melhoramento de Plantas}. Editora UFLA.
 
-  Scott RJ, Knott M 1974. A cluster analysis method for grouping mans in the
+  Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
   analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
 }
 
@@ -82,37 +82,39 @@
   ## More details: demo(package='ScottKnott')
   ##
   
+  ## Note: The factors are in uppercase and its levels in lowercase!
+
   data(SSPE)
   ## From: design matrix (dm) and response variable (y)
-  ## Main factor: p
-  sk1 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='p', error='blk:p'))
+  ## Main factor: P
+  sk1 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='P', error='blk:P'))
   summary(sk1)
   
-  # Main factor: sp
-  sk2 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='sp', error='blk:p:sp', sig.level=0.025))
+  # Main factor: SP
+  sk2 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='SP', error='blk:P:SP', sig.level=0.025))
   summary(sk2)
   
-  # Main factor: ssp
-  sk3 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='ssp', error='Within', sig.level=0.1))
+  # Main factor: SSP
+  sk3 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='SSP', error='Within', sig.level=0.1))
   summary(sk3)
   
-  ## Nested: sp/p=1
-  skn1 <- with(SSPE, SK.nest(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='sp:p', error='blk:p:sp', fl2=1))
+  ## Nested: p1/SP
+  skn1 <- with(SSPE, SK.nest(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                             which='SP:P', error='blk:P:SP', fl2=1))
   summary(skn1)
 
   ## From: aovlist
-  av <- with(SSPE, aov(y ~  blk + ssp*sp*p + Error(blk/p/sp), data=dfm))
+  av <- with(SSPE, aov(y ~  blk + SSP*SP*P + Error(blk/P/SP), data=dfm))
   summary(av)   
 
-  ## Nested: ssp/sp/p (at various levels of sp and p) 
-  skn2 <- SK.nest(av, which='ssp:sp:p', error='Within', fl2=1, fl3=1)
+  ## Nested: p/sp/SSP (at various levels of SP and P) 
+  skn2 <- SK.nest(av, which='SSP:SP:P', error='Within', fl2=1, fl3=1)
   summary(skn2)
 
-  skn3 <- SK.nest(av, which='ssp:sp:p', error='Within', fl2=2, fl3=1)
+  skn3 <- SK.nest(av, which='SSP:SP:P', error='Within', fl2=2, fl3=1)
   summary(skn3)
 }
 

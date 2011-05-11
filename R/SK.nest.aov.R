@@ -28,7 +28,7 @@ SK.nest.aov <- function(x, which, id.trim=3, fl2, fl3=0, sig.level=.05, ...)
     }
     f1 <- paste(strtrim(which1, id.trim), 1:l, sep='_')
     f2 <- paste(strtrim(which2, id.trim), fl2, sep='_')
-    fl <- paste(f1, f2, sep='/')
+    fl <- tolower(paste(f2, f1, sep='/'))
     rownames(m.inf) <- fl
   }   
   else 
@@ -50,7 +50,7 @@ SK.nest.aov <- function(x, which, id.trim=3, fl2, fl3=0, sig.level=.05, ...)
     f1 <- paste(strtrim(which1, id.trim), 1:l, sep='_')
     f2 <- paste(strtrim(which2, id.trim), fl2, sep='_')
     f3 <- paste(strtrim(which3, id.trim), fl3, sep='_')
-    fl <- paste(f1, f2, f3, sep='/')
+    fl <- tolower(paste(f3, f2, f1, sep='/'))
     rownames(m.inf) <- fl
   }
   nms   <- dimnames(tab)[[1]]

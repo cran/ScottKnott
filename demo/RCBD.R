@@ -9,17 +9,20 @@ library(ScottKnott)
 data(RCBD)
 
 ## Design matrix (dm) and response variable (y)
-sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra', which = 'tra'))
+sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra',
+                     which = 'tra'))
 summary(sk1)
 plot(sk1)
 
 ## From: data.frame (dfm), which='tra'
-sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra', which='tra'))
+sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra',
+                     which='tra'))
 summary(sk2)
 plot(sk2, mm.lty=3, title='Factor levels')
 
 ## From: data.frame (dfm), which='blk'
-sk3 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra', which='blk'))
+sk3 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra',
+                     which='blk'))
 summary(sk3)
 plot(sk3, id.lab=paste('Block', 1:length(sk3$groups), sep='_'), title='Blocks')
 
@@ -38,6 +41,7 @@ summary(sk5)
 plot(sk5, id.lab=paste('Block', 1:length(sk5$groups), sep='_'), title='Blocks')
 
 ## From: aov, which='tra' explicit
-sk6 <- SK(x=av1, which='tra')
+sk6 <- SK(x=av1,
+          which='tra')
 summary(sk6)
 plot(sk6, xlab='', title='Factor levels')

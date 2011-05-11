@@ -20,27 +20,35 @@ summary.SK.nest <- function(object, ...)
                   sep=''))
   if(class(object$av)[1]=='aovlist'){
     if(object$fl3 == 0){
-      cat('Factor:', names(dimnames(object$tab)[1]), 'for level =',
-          dimnames(object$tab)[[2]][object$fl2], 'of factor:',
-          names(dimnames(object$tab)[2]), '\n')
+      cat('Nested:',
+          paste(names(dimnames(object$tab)[1]),
+                '/',
+                names(dimnames(object$tab)[2]), sep=''),
+          '\n')
     } else {
-      cat('Factor:', names(dimnames(object$tab)[1]),
-        'for level =', dimnames(object$tab)[[2]][object$fl2],
-        'of factor:', names(dimnames(object$tab)[2]),
-        'for level=', dimnames(object$tab)[[3]][object$fl3],
-        'of factor:', names(dimnames(object$tab)[3]), '\n')
+      cat('Nested:',
+          paste(names(dimnames(object$tab)[1]),
+                '/',
+                names(dimnames(object$tab)[2]),
+                '/',
+                names(dimnames(object$tab)[3]), sep=''),
+          '\n')
     }
   } else {
     if(object$fl3 == 0){
-      cat('Factor:', names(dimnames(object$tab)[1]), 'for level =',
-          dimnames(object$tab)[[2]][object$fl2], 'of factor:',
-          names(dimnames(object$tab)[2]), '\n')
+      cat('Nested:',
+          paste(names(dimnames(object$tab)[1]),
+                '/',
+                names(dimnames(object$tab)[2]), sep=''),
+          '\n')
     } else {
-      cat('Factor:', names(dimnames(object$tab)[1]),
-          'for level =', dimnames(object$tab)[[2]][object$fl2],
-          'of factor:', names(dimnames(object$tab)[2]),
-          'for level =', dimnames(object$tab)[[3]][object$fl3],
-          'of factor:', names(dimnames(object$tab)[3]), '\n')
+      cat('Nested:',
+          paste(names(dimnames(object$tab)[1]),
+                '/',
+                names(dimnames(object$tab)[2]),
+                '/',
+                names(dimnames(object$tab)[3]), sep=''),
+          '\n')
     }
   }
   print(out, row.names=FALSE)

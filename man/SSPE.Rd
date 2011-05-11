@@ -9,6 +9,7 @@
 }
 
 \usage{
+  data(SSPE)
   SSPE
 }
 

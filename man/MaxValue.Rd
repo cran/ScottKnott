@@ -65,10 +65,10 @@
 }
 
 \references{
-  Ramalho MAP, Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
+  Ramalho M.A.P., Ferreira D.F., Oliveira A.C. 2000. \emph{Experimentacao em Genetica
   e Melhoramento de Plantas}. Editora UFLA.
 
-  Scott RJ, Knott M 1974. A cluster analysis method for grouping mans in the
+  Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
   analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
 }
 
@@ -101,7 +101,7 @@
 
   ## Grouping the means: sig.level=.05
   groups  <- MaxValue(g, means, mMSE, dfr, sig.level=.05, 1, rep(0, g), 0,
-               rep(0, g))
+                      rep(0, g))
 
   ## The result: sig.level=.05
   groups
@@ -109,7 +109,7 @@
 
   ## Grouping the means: sig.level=.10
   groups  <- MaxValue(g, means, mMSE, dfr, sig.level=.10, 1, rep(0, g), 0,
-	             rep(0, g))
+	                    rep(0, g))
 
   ## The result: sig.level=.10
   groups

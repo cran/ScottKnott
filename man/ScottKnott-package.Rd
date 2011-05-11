@@ -13,7 +13,7 @@
   context, as for example Gates and Bilbro (1978), Bony et al. (2001),
   Dilson et al. (2002) and Jyotsna et al. (2003).
 
-  It was developed by Scott, A.J. and Knott, M (Scott and Knott, 1974).
+  It was developed by Scott, A.J. and Knott, M. (Scott and Knott, 1974).
   All methods used up to that date as, for example, the t-test, Tukey, Duncan,
   Newman-Keuls procedures, have overlapping problems. By overlapping we mean
   the possibility of one or more treatments to be classified in more than one
@@ -51,11 +51,11 @@
 
 \details{
   \tabular{ll}{
-  Package: \tab ScottKnott\cr
-  Type: \tab Package\cr
-  Version: \tab 1.0.0\cr
-  Date: \tab 2008-08-19\cr
-  License: \tab GPL (>= 2)\cr
+    Package: \tab ScottKnott\cr
+    Type: \tab Package\cr
+    Version: \tab 1.1-2\cr
+    Date: \tab 2011-05-11\cr
+    License: \tab GPL (>= 2)\cr
   }
 }
 
@@ -66,40 +66,43 @@
 }
 
 \references{
-  Bony S, Pichon N, Ravel C, Durix A, Balfourier F, Guillaumin JJ 2001. The
+  Bony S., Pichon N., Ravel C., Durix A., Balfourier F., Guillaumin J.J. 2001. The
   Relationship be-tween Mycotoxin Synthesis and Isolate Morphology in Fungal
   Endophytes of Lolium perenne. \emph{New Phytologist}, \bold{1521}, 125-137.
 
-  Borges LC, FERREIRA DF 2003. Poder e taxas de erro tipo I dos testes
+  Borges L.C., FERREIRA D.F. 2003. Poder e taxas de erro tipo I dos testes
   Scott-Knott, Tukey e Student-Newman-Keuls sob distribuicoes normal e nao
   normais dos residuos. Power and type I errors rate of Scott-Knott, Tukey and
   Student-Newman-Keuls tests under normal and no-normal distributions of the
   residues. \emph{Rev. Mat. Estat.}, Sao Paulo, \bold{211}: 67-83.
 
-  Calinski T, Corsten LCA 1985. Clustering Means in ANOVA by Simultaneous
+  Calinski T., Corsten L.C.A. 1985. Clustering Means in ANOVA by Simultaneous
   Testing. \emph{Bio-metrics}, \bold{411}, 39-48.
 
-  Da Silva EC, Ferreira DF, Bearzoti E 1999. Evaluation of power and type I
+  Da Silva E.C, Ferreira D.F, Bearzoti E. 1999. Evaluation of power and type I
   error rates of Scott-Knotts test by the method of Monte Carlo.
   \emph{Cienc. agrotec.}, Lavras, \bold{23}, 687-696.
 
-  Dilson AB, David SD, Kazimierz J, William WK 2002. Half-sib progeny evaluation
+  Dilson A.B, David S.D., Kazimierz J., William W.K. 2002. Half-sib progeny evaluation
   and selection of potatoes resistant to the US8 genotype of Phytophthora
   infestans from crosses between resistant and susceptible parents.
   \emph{Euphytica}, \bold{125}, 129-138.
 
-  Gates CE, Bilbro JD 1978. Illustration of a Cluster Analysis Method for Mean
+  Gates C.E., Bilbro J.D. 1978. Illustration of a Cluster Analysis Method for Mean
   Separation. \emph{Agron J}, \bold{70}, 462-465.
 
-  Jyotsna S, Zettler LW, van Sambeek JW, Ellersieck MR, Starbuck CJ 2003.
+  Wilkinson, G.N, Rogers, C.E. 1973. Journal of the Royal Statistical Society.
+  Series C (Applied Statistics), Vol. 22, No. 3, pp. 392-399.
+
+  Jyotsna S., Zettler L.W., van Sambeek J.W., Ellersieck M.R., Starbuck C.J. 2003.
   Symbiotic Seed Germination and Mycorrhizae of Federally Threatened Platanthera
   PraeclaraOrchidaceae.
   \emph{American Midland Naturalist}, \bold{1491}, 104-120.
 
-  Ramalho MAP, Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
-  e Melhoramento de Plantas}. Editora UFLA.
+  Ramalho M.A.P., Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
+    e Melhoramento de Plantas}. Editora UFLA.
 
-  Scott RJ, Knott M 1974. A cluster analysis method for grouping mans in the
+  Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
   analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
 }
 
@@ -114,28 +117,31 @@
   ## Examples: Completely Randomized Design (CRD)
   ## More details: demo(package='ScottKnott')
   ##
-  
+
   ## The parameters can be: vectors, design matrix and the response variable,
   ## data.frame or aov
   data(CRD2)
-  
+
   ## From: design matrix (dm) and response variable (y)
-  sk1 <- with(CRD2, SK(x=dm, y=y, model='y ~ x', which='x', sig.level=0.005,
-    id.trim=5))
+  sk1 <- with(CRD2, SK(x=dm, y=y, model='y ~ x',
+                       which='x', sig.level=0.005,
+  id.trim=5))
   summary(sk1)
   plot(sk1, col=rainbow(max(sk1$groups)), mm.lty=3, id.las=2, rl=FALSE,
-    title='Factor levels, sig.level=0.005', )
-  
+  title='Factor levels (sig.level=0.005)', )
+
   ## From: data.frame (dfm)
-  sk2 <- with(CRD2, SK(x=dfm, model='y ~ x', which='x', id.trim=5))
+  sk2 <- with(CRD2, SK(x=dfm, model='y ~ x',
+                       which='x', id.trim=5))
   summary(sk2)
   plot(sk2, col=rainbow(max(sk2$groups)), id.las=2, rl=FALSE)
-  
+
   ## From: aov
   av <- with(CRD2, aov(y ~ x , data = dfm))
   summary(av)
-  
-  sk3 <- with(CRD2, SK(x=av, which='x', id.trim=5))
+
+  sk3 <- with(CRD2, SK(x=av,
+                       which='x', id.trim=5))
   summary(sk3)
   plot(sk3, col=rainbow(max(sk3$groups)), rl=FALSE, id.las=2, title=NULL)
 
@@ -143,47 +149,52 @@
   ## Example: Randomized Complete Block Design (RCBD)
   ## More details: demo(package='ScottKnott')
   ##
-  
+
   ## The parameters can be: design matrix and the response variable,
   ## data.frame or aov
-  
+
   data(RCBD)
-  
+
   ## Design matrix (dm) and response variable (y)
-  sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra', which = 'tra'))
+  sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra',
+                       which = 'tra'))
   summary(sk1)
   plot(sk1)
-  
+
   ## From: data.frame (dfm), which='tra'
-  sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra', which='tra'))
+  sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra',
+                       which='tra'))
   summary(sk2)
   plot(sk2, mm.lty=3, title='Factor levels')
-  
+
   ##
   ## Example: Latin Squares Design (LSD)
   ## More details: demo(package='ScottKnott')
   ##
-  
+
   ## The parameters can be: design matrix and the response variable,
   ## data.frame or aov
-  
+
   data(LSD)
-  
+
   ## From: design matrix (dm) and response variable (y)
-  sk1 <- with(LSD, SK(x=dm, y=y, model='y ~ rows + cols + tra', which='tra'))
+  sk1 <- with(LSD, SK(x=dm, y=y, model='y ~ rows + cols + tra',
+                      which='tra'))
   summary(sk1)
   plot(sk1)
-  
+
   ## From: data.frame
-  sk2 <- with(LSD, SK(x=dfm, model='y ~ rows + cols + tra', which='tra'))
+  sk2 <- with(LSD, SK(x=dfm, model='y ~ rows + cols + tra',
+                      which='tra'))
   summary(sk2)
   plot(sk2, title='Factor levels')
-  
+
   ## From: aov
   av <- with(LSD, aov(y ~ rows + cols + tra, data=dfm))
   summary(av)
-  
-  sk3 <- SK(av, which='tra')
+
+  sk3 <- SK(av,
+            which='tra')
   summary(sk3)
   plot(sk3, title='Factor levels')
 
@@ -191,115 +202,121 @@
   ## Example: Factorial Experiment (FE)
   ## More details: demo(package='ScottKnott')
   ##
-  
+
   ## The parameters can be: design matrix and the response variable,
   ## data.frame or aov
+
+  ## Note: The factors are in uppercase and its levels in lowercase!
   
   data(FE)
 
   ## From: design matrix (dm) and response variable (y)
   ## Main factor: N
-  sk1 <- with(FE, SK(x=dm, y=y, model='y ~ blk + N * P * K', 
-    which='N'))
+  sk1 <- with(FE, SK(x=dm, y=y, model='y ~ blk + N*P*K',
+                     which='N'))
   summary(sk1)
   plot(sk1, title='Main effect: N')
 
-  ## Nested: N/P=1
-  nsk1 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N * P * K',
-    which='N:P', fl2=1))
+  ## Nested: p1/N
+  nsk1 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N*P*K',
+                           which='N:P', fl2=1))
   summary(nsk1)
-  plot(nsk1, title='Effect: N/P=1')
+  plot(nsk1, title='Effect: p1/N')
 
-  ## Nested: P/K=1
-  nsk2 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N * P * K',
-    which='P:K', fl2=1))
+  ## Nested: k1/P
+  nsk2 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N*P*K',
+                           which='P:K', fl2=1))
   summary(nsk2)
-  plot(nsk2, title='Effect: P/K=1')
+  plot(nsk2, title='Effect: k1/P')
 
-  ## Nested: N/P=2/K=2
-  nsk3 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N * P * K',
-    which='N:P:K', fl2=2, fl3=2))
+  ## Nested: k2/p2/N
+  nsk3 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N*P*K',
+                           which='N:P:K', fl2=2, fl3=2))
   summary(nsk3)
-  plot(nsk3, title='Effect: N/P=2/K=2')
+  plot(nsk3, title='Effect: k2/p2/N')
 
-  ## Nested: P/N=1/K=1
-  nsk4 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + P * N * K',
-    which='P:N:K', fl2=1, fl3=1))
+  ## Nested: k1/n1/P
+  nsk4 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + P*N*K',
+                           which='P:N:K', fl2=1, fl3=1))
   summary(nsk4)
-  plot(nsk4, title='Effect: P/N=1/K=1')
+  plot(nsk4, title='Effect: k1/n1/P')
 
-  ## Nested: K/N=1/P=1
-  nsk5 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + K * N * P',
-    which='K:N:P', fl2=1, fl3=1))
+  ## Nested: p1/n1/K
+  nsk5 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + K*N*P',
+                           which='K:N:P', fl2=1, fl3=1))
   summary(nsk5)
-  plot(nsk5, title='Effect: K/N=1/P=1')
+  plot(nsk5, title='Effect: p1/n1/K')
 
   ##
   ## Example: Split-plot Experiment (SPE)
   ## More details: demo(package='ScottKnott')
   ##
+
+  ## Note: The factors are in uppercase and its levels in lowercase!
   
   data(SPE)
 
   ## The parameters can be: design matrix and the response variable,
   ## data.frame or aov
-  
+
   ## From: design matrix (dm) and response variable (y)
-  ## Main factor: p
-  sk1 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + sp*p + Error(blk/p)',
-    which='p', error ='blk:p'))
+  ## Main factor: P
+  sk1 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + SP*P + Error(blk/P)',
+                      which='P', error ='blk:P'))
   summary(sk1)
   plot(sk1)
-  
-  ## Main factor: sp
-  sk2 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + sp*p + Error(blk/p)',
-    which='sp', error ='Within', sig.level=0.025 ))
+
+  ## Main factor: SP
+  sk2 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + SP*P + Error(blk/P)',
+                      which='SP', error ='Within', sig.level=0.025 ))
   summary(sk2)
   plot(sk2, xlab='Groups', ylab='Main effect: sp',
-    title='Main effect: sp, sig.level=0.025')
-  
-  ## Nested: sp/p=1
-  skn1 <- with(SPE, SK.nest(x=dm, y=y, model='y ~ blk + sp*p + Error(blk/p)',
-    which='sp:p', error ='Within', fl2=1 ))
+  title='Main effect: SP (sig.level=0.025)')
+
+  ## Nested: p1/SP
+  skn1 <- with(SPE, SK.nest(x=dm, y=y, model='y ~ blk + SP*P + Error(blk/P)',
+                            which='SP:P', error ='Within', fl2=1 ))
   summary(skn1)
-  plot(skn1, title='Effect: sp/p=1')
+  plot(skn1, title='Effect: p1/SP')
 
   ##
   ## Example: Split-split-plot Experiment (SSPE)
   ## More details: demo(package='ScottKnott')
   ##
-  
+
+  ## Note: The factors are in uppercase and its levels in lowercase!
+
   data(SSPE)
 
   ## From: design matrix (dm) and response variable (y)
-  ## Main factor: p
-  sk1 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='p', error='blk:p'))
+  ## Main factor: P
+  sk1 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='P', error='blk:P'))
   summary(sk1)
-  
-  # Main factor: sp
-  sk2 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='sp', error='blk:p:sp', sig.level=0.025))
+
+  # Main factor: SP
+  sk2 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='SP', error='blk:P:SP', sig.level=0.025))
   summary(sk2)
-  
-  # Main factor: ssp
-  sk3 <- with(SSPE, SK(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='ssp', error='Within', sig.level=0.1))
+
+  # Main factor: SSP
+  sk3 <- with(SSPE, SK(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                       which='SSP', error='Within', sig.level=0.1))
   summary(sk3)
-  
-  ## Nested: sp/p=1
-  skn1 <- with(SSPE, SK.nest(dm, y, model='y ~ blk + ssp*sp*p + Error(blk/p/sp)',
-    which='sp:p', error='blk:p:sp', fl2=1))
+
+  ## Nested: p1/SP
+  skn1 <- with(SSPE, SK.nest(dm, y, model='y ~ blk + SSP*SP*P + Error(blk/P/SP)',
+                             which='SP:P', error='blk:P:SP', fl2=1))
   summary(skn1)
 
   ## From: aovlist
-  av <- with(SSPE, aov(y ~  blk + ssp*sp*p + Error(blk/p/sp), data=dfm))
+  av <- with(SSPE, aov(y ~  blk + SSP*SP*P + Error(blk/P/SP), data=dfm))
   summary(av)   
 
-  ## Nested: ssp/sp/p (at various levels of sp and p) 
-  skn6 <- SK.nest(av, which='ssp:sp:p', error='Within', fl2=1, fl3=1)
+  ## Nested: p/sp/SSP (at various levels of sp and p) 
+  skn6 <- SK.nest(av, which='SSP:SP:P', error='Within', fl2=1, fl3=1)
   summary(skn6)
 
-  skn7 <- SK.nest(av, which='ssp:sp:p', error='Within', fl2=2, fl3=1)
+  skn7 <- SK.nest(av, which='SSP:SP:P', error='Within', fl2=2, fl3=1)
   summary(skn7)
 }

@@ -9,6 +9,7 @@
 }
 
 \usage{
+  data(CRD2)
   CRD2
 }
 

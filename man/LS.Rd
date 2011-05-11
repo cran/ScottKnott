@@ -9,6 +9,7 @@
 }
 
 \usage{
+  data(LSD)
   LSD
 }
 

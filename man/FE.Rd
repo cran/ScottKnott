@@ -9,6 +9,7 @@
 }
 
 \usage{
+  data(FE)
   FE
 }
 

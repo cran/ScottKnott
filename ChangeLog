@@ -1,9 +1,21 @@
+2011-05-11 vs. 1.1-2 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
+
+	* New data file: sorghum
+	* The notation of factorial models now agrees with Wilkinson and Rogers (1973)
+	* The methods SK.nest.aov and SK.nest.aovlist were a bit enhanced to adapt to
+	the new notation above
+	* The demos were a bit enhanced
+
+2010-06-13 vs. 1.1-1 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
+
+	* The S3 method to summary SK.nest objects was a bit enhanced
+
 2010-03-28 vs. 1.1.0 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
 
-  * The classes SK and SK.nest have been simplified
-  * The S3 method to plot Sk and SK.nest objects was enhanced
+	* The classes SK and SK.nest have been simplified
+	* The S3 method to plot SK and SK.nest objects was a bit enhanced
 	  
 2009-01-23  vs. 1.0.0 - Jose Claudio Faria  <joseclaudio.faria@gmail.com>
 
-  * Released to CRAN
+	* Released to CRAN
 

@@ -61,10 +61,10 @@
 }
 
 \references{
-  Ramalho MAP, Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
+  Ramalho M.A.P., Ferreira D.F., Oliveira A.C. 2000. \emph{Experimentacao em Genetica
   e Melhoramento de Plantas}. Editora UFLA.
 
-  Scott RJ, Knott M 1974. A cluster analysis method for grouping mans in the
+  Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
   analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
 }
 
@@ -79,14 +79,15 @@
   data(CRD2)
   
   ## From: design matrix (dm) and response variable (y)
-  sk1 <- with(CRD2, SK(x=dm, y=y, model='y ~ x', which='x', sig.level=0.005,
-    id.trim=5))
+  sk1 <- with(CRD2, SK(x=dm, y=y, model='y ~ x',
+                       which='x', sig.level=0.005, id.trim=5))
   summary(sk1)
   plot(sk1, col=rainbow(max(sk1$groups)), mm.lty=3, id.las=2, rl=FALSE,
-    title='factor levels, sig.level=0.005')
+       title='factor levels, sig.level=0.005')
   
   ## From: data.frame (dfm)
-  sk2 <- with(CRD2, SK(x=dfm, model='y ~ x', which='x', id.trim=5))
+  sk2 <- with(CRD2, SK(x=dfm, model='y ~ x',
+                       which='x', id.trim=5))
   summary(sk2)
   plot(sk2, col=rainbow(max(sk2$groups)), id.las=2, rl=FALSE)
   
@@ -94,7 +95,8 @@
   av <- with(CRD2, aov(y ~ x , data = dfm))
   summary(av)
   
-  sk3 <- with(CRD2, SK(x=av, which='x', id.trim=5))
+  sk3 <- with(CRD2, SK(x=av,
+                       which='x', id.trim=5))
   summary(sk3)
   plot(sk3, col=rainbow(max(sk3$groups)), rl=FALSE, id.las=2, title=NULL)
 
@@ -109,12 +111,14 @@
   data(RCBD)
   
   ## Design matrix (dm) and response variable (y)
-  sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra', which = 'tra'))
+  sk1 <- with(RCBD, SK(x=dm, y=y, model='y ~ blk + tra',
+                       which = 'tra'))
   summary(sk1)
   plot(sk1)
   
   ## From: data.frame (dfm), which='tra'
-  sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra', which='tra'))
+  sk2 <- with(RCBD, SK(x=dfm, model='y ~ blk + tra',
+                       which='tra'))
   summary(sk2)
   plot(sk2, mm.lty=3, title='Factor levels')
   
@@ -129,12 +133,14 @@
   data(LSD)
   
   ## From: design matrix (dm) and response variable (y)
-  sk1 <- with(LSD, SK(x=dm, y=y, model='y ~ rows + cols + tra', which='tra'))
+  sk1 <- with(LSD, SK(x=dm, y=y, model='y ~ rows + cols + tra',
+                      which='tra'))
   summary(sk1)
   plot(sk1)
   
   ## From: data.frame
-  sk2 <- with(LSD, SK(x=dfm, model='y ~ rows + cols + tra', which='tra'))
+  sk2 <- with(LSD, SK(x=dfm, model='y ~ rows + cols + tra',
+                      which='tra'))
   summary(sk2)
   plot(sk2, title='Factor levels')
   
@@ -142,7 +148,8 @@
   av <- with(LSD, aov(y ~ rows + cols + tra, data=dfm))
   summary(av)
   
-  sk3 <- SK(av, which='tra')
+  sk3 <- SK(av,
+            which='tra')
   summary(sk3)
   plot(sk3, title='Factor levels')
 
@@ -154,19 +161,21 @@
   ## The parameters can be: design matrix and the response variable,
   ## data.frame or aov
   
+  ## Note: The factors are in uppercase and its levels in lowercase!
+
   data(FE)
   ## From: design matrix (dm) and response variable (y)
   ## Main factor: N
-  sk1 <- with(FE, SK(x=dm, y=y, model='y ~ blk + N * P * K', 
-    which='N'))
+  sk1 <- with(FE, SK(x=dm, y=y, model='y ~ blk + N*P*K', 
+                     which='N'))
   summary(sk1)
   plot(sk1, title='Main effect: N')
 
-  ## Nested: N/P=1
-  nsk1 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N * P * K',
-    which='N:P', fl2=1))
+  ## Nested: p1/N
+  nsk1 <- with(FE, SK.nest(x=dm, y=y, model='y ~ blk + N*P*K',
+                           which='N:P', fl2=1))
   summary(nsk1)
-  plot(nsk1, title='Effect: N/P=1')
+  plot(nsk1, title='Effect: p1/N')
 }
 
 \keyword{package}
