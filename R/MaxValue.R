@@ -14,8 +14,17 @@
 ## the former group.
 ## In the end, each node without children represents a group of means.
 
-MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
-              g1=g, sqsum=rep(0, g1))
+MaxValue <- function(g,
+                     means,
+                     mMSE,
+                     dfr,
+                     sig.level,
+                     k,
+                     group,
+                     ngroup,
+                     markg,
+                     g1=g,
+                     sqsum=rep(0, g1))
 {
   for(k1 in k:(g-1)){
     t1 <- sum(means[k:k1])
@@ -28,11 +37,14 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
   ord1 <- order(sqsum, decreasing=TRUE)[1]
   # the maximum value of the between groups sum of squares
   b0   <- max(sqsum)
-  si02 <- (1/((g-k+1)+dfr))*(sum((means[k:g]-mean(means[k:g]))^2)+dfr*mMSE)
+  si02 <- (1/((g-k+1) + dfr))*(sum((means[k:g] - mean(means[k:g]))^2) + dfr*mMSE)
   lam  <- (pi/(2*(pi-2)))*b0/si02
-  valchisq <- qchisq((sig.level), lower.tail=FALSE, df=(g-k+1)/(pi-2))
+  valchisq <- qchisq((sig.level),
+                     lower.tail=FALSE,
+                     df=(g-k+1)/(pi-2))
   # if true it returns one node to the right if false it goes forward one node to the left
-  if((lam < valchisq) | (ord1 == k)){
+  if((lam < valchisq) |
+     (ord1 == k)){
     # In the case of a single average left (maximum)
     if(lam > valchisq){
       # it marks the group to the left consisting of a single mean
@@ -48,14 +60,14 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
       # it forms a group of means
       group[k:g] <- ngroup
       # if this group is the last one
-        if (prod(group) > 0)
-      # If the upper limit of the latter group formed is equal to the total
-      # number of treatments than  the grouping algorithm is ended
-      return (group)
+      if (prod(group) > 0)
+        # If the upper limit of the latter group formed is equal to the total
+        # number of treatments than  the grouping algorithm is ended
+        return (group)
       # it marks the lower limit of the group of means to be used in the
       # calculation of the maximum sqsum on returning one node to the right
       k <- g+1
-       # it marks the upper limit of the group of means to be used in the
+      # it marks the upper limit of the group of means to be used in the
       # calculation of the maximum sqsum on returning one node to the right
       g <- markg[g]
     }
@@ -64,14 +76,14 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
       ngroup   <- ngroup + 1
       group[g] <- ngroup
 
-    if(prod(group) > 0)
-      # If the upper limit of the latter group formed is equal to the total
-      # number of treatments than  the grouping algorithm is ended
-      return(group)
+      if(prod(group) > 0)
+        # If the upper limit of the latter group formed is equal to the total
+        # number of treatments than  the grouping algorithm is ended
+        return(group)
 
-    # the group of just one mean group had already been formed, a further
-    # jump to the right and another check whether there was just one mean
-    #left to the right
+      # the group of just one mean group had already been formed, a further
+      # jump to the right and another check whether there was just one mean
+      #left to the right
       k <- g + 1
       g <- markg[g]
     }
@@ -81,5 +93,13 @@ MaxValue <- function(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg,
     markg[ord1] <- g
     g <- ord1
   }
-  MaxValue(g, means, mMSE, dfr, sig.level, k, group, ngroup, markg)
+  MaxValue(g,
+           means,
+           mMSE,
+           dfr,
+           sig.level,
+           k,
+           group,
+           ngroup,
+           markg)
 }

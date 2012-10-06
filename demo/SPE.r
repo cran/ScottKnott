@@ -12,67 +12,108 @@ data(SPE)
 
 ## From: design matrix (dm) and response variable (y)
 ## Main factor: P
-sk1 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + P*SP + Error(blk/P)',
-                    which='P', error ='blk:P'))
+sk1 <- with(SPE,
+            SK(x=dm, 
+               y=y, 
+               model='y ~ blk + P*SP + Error(blk/P)',
+               which='P',
+               error='blk:P'))
 summary(sk1)
 plot(sk1)
 
 ## Main factor: SP
-sk2 <- with(SPE, SK(x=dm, y=y, model='y ~ blk + P*SP + Error(blk/P)',
-                    which='SP', error ='Within', sig.level=0.025))
+sk2 <- with(SPE,
+            SK(x=dm,
+               y=y,
+               model='y ~ blk + P*SP + Error(blk/P)',
+               which='SP',
+               error='Within'))
 summary(sk2)
-plot(sk2, title='Main effect: SP (sig.level=0.025)')
+plot(sk2,
+     title='Main effect: SP')
 
 ## Nested: p1/SP
-skn1 <- with(SPE, SK.nest(x=dm, y=y, model='y ~ blk + SP*P + Error(blk/P)',
-                          which='SP:P', error ='Within', fl2=1))
+## Studing SP inside the level one of P
+skn1 <- with(SPE,
+             SK.nest(x=dm,
+                     y=y,
+                     model='y ~ blk + P*SP + Error(blk/P)',
+                     which='P:SP',
+                     error='Within',
+                     fl1=1))
 summary(skn1)
-plot(skn1, title='Effect: p1/SP')
+plot(skn1,
+     title='Effect: p1/SP')
 
 
 ## From: data.frame
 ## Main factor: SP
-sk3 <- with(SPE, SK(dfm, model='y ~ blk + P*SP + Error(blk/P)',
-                    which='SP', error ='Within', sig.level=0.025))
+sk3 <- with(SPE,
+            SK(dfm,
+               model='y ~ blk + P*SP + Error(blk/P)',
+               which='SP',
+               error='Within'))
 summary(sk3)
-plot(sk3, title='Main effect: SP (sig.level=0.025)')
+plot(sk3, 
+     title='Main effect: SP')
 
 ## Nested: p1/SP
-skn2 <- with(SPE, SK.nest(dfm, model='y ~ blk + SP*P + Error(blk/P)',
-                          which='SP:P', error ='Within', fl2=1 ))
+skn2 <- with(SPE,
+             SK.nest(dfm,
+                     model='y ~ blk + P*SP + Error(blk/P)',
+                     which='P:SP',
+                     error ='Within',
+                     fl1=1 ))
 summary(skn2)
-plot(skn2, title='Effect: p1/SP')
+plot(skn2,
+     title='Effect: p1/SP')
 
 
 ## From: aovlist
-av1 <- with(SPE, aov(y ~ blk + SP*P + Error(blk/P), data=dfm))
+av1 <- with(SPE,
+            aov(y ~ blk + P*SP + Error(blk/P),
+                data=dfm))
 summary(av1)
 
 ## Main factor: SP
 sk4 <- SK(av1,
-          which='SP', error ='Within', sig.level=0.1)
+          which='SP',
+          error='Within')
 summary(sk4)
-plot(sk4, title='Main effect: SP (sig.level=0.1)')
+plot(sk4, title='Main effect: SP')
 
 ## Main factor: P
-sk5 <- SK(av1, which='P', error='blk:P')
+sk5 <- SK(av1,
+          which='P',
+          error='blk:P')
 summary(sk5)
-plot(sk5, title='Main effect: P')
+plot(sk5, 
+     title='Main effect: P')
 
 ## Nested: p1/SP
+## Studing SP inside of level one of P
 skn3 <- SK.nest(av1,
-                which='SP:P', error='Within', fl2=1)
+                which='P:SP',
+                error='Within',
+                fl1=1)
 summary(skn3)
-plot(skn3, title='Effect: p1/SP')
+plot(skn3,
+     title='Effect: p1/SP')
 
 ## Nested: p2/SP
 skn4 <- SK.nest(av1,
-                which='SP:P', error='Within', fl2=2)
+                which='P:SP',
+                error='Within',
+                fl1=2)
 summary(skn4)
-plot(skn4, title='Effect: p2/SP')
+plot(skn4,
+     title='Effect: p2/SP')
 
 ## Nested: p3/SP
 skn5 <- SK.nest(av1,
-                which='SP:P', error='Within', fl2=3, sig.level=0.08)
+                which='P:SP',
+                error='Within',
+                fl1=3)
 summary(skn5)
-plot(skn5, title='Effect: p3/SP (sig.level=0.08)')
+plot(skn5,
+     title='Effect: p3/SP')
