@@ -2,10 +2,12 @@
 \alias{plot.SK}
 
 \title{
-  Plot SK and SK.nest Objects}
+  Plot SK and SK.nest Objects
+}
 
 \description{
-  S3 method to plot \code{SK} and \code{SK.nest} objects.}
+  S3 method to plot \code{SK} and \code{SK.nest} objects.
+}
 
 \usage{
 \method{plot}{SK}(x,
@@ -23,42 +25,49 @@
      rl.col='gray',
      mm=TRUE,
      mm.lty=1, 
-     title="Means grouped by color(s)", \dots)}
+     title="Means grouped by color(s)", \dots)
+}
 
 \arguments{
   \item{x}{A \code{SK} object.}
   \item{pch}{A vector of plotting symbols or characters.}
   \item{col}{A vector of colors for the means representation.}
-  \item{xlab}{A label for the x axis.}
-  \item{ylab}{A label for the y axis.}
-  \item{xlim}{The x limits of the plot.}
-  \item{ylim}{The y limits of the plot.}
+  \item{xlab}{A label for the \samp{x} axis.}
+  \item{ylab}{A label for the \samp{y} axis.}
+  \item{xlim}{The \samp{x} limits of the plot.}
+  \item{ylim}{The \samp{y} limits of the plot.}
   \item{id.lab}{Factor level names at x-axis.}
   \item{id.las}{Factor level names written either horizontally or vertically.}
-  \item{id.col}{A logical value. If TRUE (the default), the \code{col} parameter will be used for the x axis.}
+  \item{id.col}{A logical value. If \code{TRUE} (the default), the \code{col} parameter will be used for the \samp{x} axis.}
   \item{rl}{Horizontal line connecting the circle to the y-axis.}
-  \item{rl.lty}{Line type of rl.}
-  \item{rl.col}{Line color of rl.}
+  \item{rl.lty}{Line type of \samp{rl}.}
+  \item{rl.col}{Line color of \samp{rl}.}
   \item{mm}{Vertical line through the circle (mean value) linking the minimum to the maximum of the factor level values corresponding to that mean value.}
-  \item{mm.lty}{Line type of mm.}
+  \item{mm.lty}{Line type of \samp{mm}.}
   \item{title}{A title for the plot.}
-  \item{\dots}{Optional plotting parameters.}} 
+  \item{\dots}{Optional plotting parameters.}
+} 
 
 \details{
   The \code{plot.SK} function is a S3 method to plot \code{SK} and
   \code{SK.nest} objetcs. It generates a serie of points (the means) and a 
   vertical line showing the minimum e maximum of the values corresponding to
-  each group mean. The groups are diferentiated by colors.}
+  each group mean. The groups are diferentiated by colors.
+}
 
 \author{
   Enio Jelihovschi (\email{eniojelihovs@gmail.com})\cr
-  Jose Claudio Faria (\email{joseclaudio.faria@gmail.com})\cr
-  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr}
+  José Cláudio Faria (\email{joseclaudio.faria@gmail.com})\cr
+  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr
+}
 
 \references{
-  Murrell, P. 2005. R Graphics. Chapman & Hall/CRC Press.}
+  Murrell, P. 2005. R Graphics. Chapman & Hall/CRC Press.
+}
 
-\seealso{\code{\link{plot}}}
+\seealso{
+  \code{\link{plot}}
+}
 
 \examples{
 ##

@@ -23,7 +23,8 @@ sk2 <- with(CRD1,
             SK(x=dm,
                y=y,
                model='y ~ x',
-               which='x'))
+               which='x',
+               dispersion='s'))
 summary(sk2)
 plot(sk2,
      pch=15,
@@ -36,7 +37,8 @@ plot(sk2,
 sk3 <- with(CRD1,
             SK(x=dfm,
                model='y ~ x',
-               which='x'))
+               which='x',
+               dispersion='se'))
 summary(sk3)
 plot(sk3,
      mm.lty=3,
@@ -103,9 +105,8 @@ av2 <- with(CRD2,
                 data=dfm))
 summary(av2)
 
-sk8 <- with(CRD2,
-            SK(x=av2,
-               which='x'))
+sk8 <- SK(x=av2,
+          which='x')
 summary(sk8)
 plot(sk8,
      col=rainbow(max(sk8$groups)),
@@ -113,4 +114,3 @@ plot(sk8,
      id.las=2,
      id.col=FALSE,
      title=NULL)
-

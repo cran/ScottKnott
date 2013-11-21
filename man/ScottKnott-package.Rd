@@ -4,7 +4,8 @@
 \docType{package}
 
 \title{
-  The ScottKnott Clustering Algorithm}
+  The ScottKnott Clustering Algorithm
+}
 
 \description{
   The Scott & Knott clustering algorithm is a very useful clustering algorithm
@@ -36,7 +37,7 @@
   Many studies, using the method of Monte Carlo, suggest that the Scott Knott
   method performs very well compared to other methods due to fact that it has
   high power and type I error rate almost always in accordance with the nominal
-  levels. The ScottKnott package performs this algorithm starting either from
+  levels. The \pkg{ScottKnott} package performs this algorithm starting either from
   \code{vectors}, \code{matrices} or \code{data.frames} joined as
   \code{default}, a \code{aov} or \code{aovlist} resulting object of previous
   analysis of variance. The results are given in the usual way as well as in
@@ -45,12 +46,14 @@
   In a few words, the test of Scott & Knott is a clustering algorithm used as an
   one of the alternatives where multiple comparizon procedures are applied with
   a very important and almost unique characteristic: it does not present
-  overlapping in the results.}
+  overlapping in the results.
+}
 
 \author{
   Enio Jelihovschi (\email{eniojelihovs@gmail.com})\cr
-  Jose Claudio Faria (\email{joseclaudio.faria@gmail.com})\cr
-  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr}
+  José Cláudio Faria (\email{joseclaudio.faria@gmail.com})\cr
+  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr
+}
 
 \references{
   Bony S., Pichon N., Ravel C., Durix A., Balfourier F., Guillaumin J.J. 2001. The
@@ -86,11 +89,12 @@
   PraeclaraOrchidaceae.
   \emph{American Midland Naturalist}, \bold{1491}, 104-120.
 
-  Ramalho M.A.P., Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
-    e Melhoramento de Plantas}. Editora UFLA.
+  Ramalho M.A.P., Ferreira DF, Oliveira AC 2000. \emph{Experimentação em Genética
+  e Melhoramento de Plantas}. Editora UFLA.
 
   Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
-  analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.}
+  analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
+}
 
 \keyword{package}
 \keyword{htest}
@@ -126,7 +130,8 @@ plot(sk1,
 sk2 <- with(CRD2, 
             SK(x=dfm,
                model='y ~ x',
-               which='x'))
+               which='x',
+               dispersion='se'))
 summary(sk2)
 plot(sk2,
      col=rainbow(max(sk2$groups)),
@@ -139,9 +144,8 @@ av <- with(CRD2,
                data=dfm))
 summary(av)
 
-sk3 <- with(CRD2,
-            SK(x=av,
-               which='x'))
+sk3 <- SK(x=av,
+          which='x')
 summary(sk3)
 plot(sk3,
      col=rainbow(max(sk3$groups)),

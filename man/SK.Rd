@@ -5,12 +5,14 @@
 \alias{SK.aovlist}
 
 \title{
-  The ScottKnott Clustering Algoritm for Single Experiments}
+  The ScottKnott Clustering Algoritm for Single Experiments
+}
 
 \description{
   These are methods for objects of class \code{vector}, \code{matrix} or
   \code{data.frame} joined as default, \code{aov} and \code{aovlist} for
-  single experiments.}
+  single experiments.
+}
 
 \usage{
   \method{SK}{default}(x,
@@ -19,30 +21,39 @@
    which,
    id.trim=3,
    error,
-   sig.level=.05, \dots)
+   sig.level=.05,
+   dispersion=c('mm', 's', 'se'), \dots)
   \method{SK}{aov}(x,
    which=NULL, 
    id.trim=3,
-   sig.level=.05, \dots)
+   sig.level=.05,
+   dispersion=c('mm', 's', 'se'), \dots)
   \method{SK}{aovlist}(x,
    which, 
    id.trim=3,
    error,
-   sig.level=.05, \dots)}
+   sig.level=.05,
+   dispersion=c('mm', 's', 'se'), \dots)
+}
 
 \arguments{
   \item{x}{A design matrix, \code{data.frame} or an \code{aov} object.}
   \item{y}{A vector of response variable. It is necessary to inform this
-    parameter only if \code{x} represent the design matrix.}
+    parameter only if \samp{x} represent the design matrix.}
   \item{which}{The name of the treatment to be used in the comparison.
     The name must be inside quoting marks.}
-  \item{model}{If x is a \code{data.frame} object, the model to be used in the
+  \item{model}{If \samp{x} is a \code{data.frame} object, the model to be used in the
     aov must be specified.}
   \item{id.trim}{The number of character to trim the id label.}
   \item{error}{The error to be considered.}
-  \item{sig.level}{Level of Significance used in the SK algorithm to create
-    the groups of means. The default value is 0.05.}
-  \item{\dots}{Potential further arguments (require by generic).}}
+  \item{sig.level}{Level of Significance used in the \code{SK} algorithm to create the groups of means.
+    The default value is 0.05.}
+  \item{dispersion}{The dispersion to be considered to the means. \cr
+    The possible vaues are: \samp{'mm'} = \samp{minimum and maximum},
+    \samp{'s'} = \samp{standart deviation},
+    \samp{'se'} = \samp{standart deviation of the mean}.}
+  \item{\dots}{Potential further arguments (require by generic).}
+}
 
 \details{
   The function \code{SK} returns an object of class \code{SK} 
@@ -50,28 +61,32 @@
   necessary variables for summary and plot.
   
   The generic functions \code{summary} and \code{plot} are used to obtain and
-  print a summary and a plot of the results.}
+  print a summary and a plot of the results.
+}
 
 \value{
-  The function \code{SK} returns a list of the class \code{SK} with the slots:
+  The function \code{SK} returns a \code{list} of the class \code{SK} with the slots:
   \item{av}{A \code{list} storing the result of \code{aov}.}
-  \item{groups}{A vector of length equal the number of factor levels marking the groups generated.}
-  \item{nms}{A vector of the labels of the factor levels.}
-  \item{ord}{A vector which keeps the position of the means of the factor levels in decreasing order.}
-  \item{m.inf}{A matrix which keeps the means, minimum and maximum of the factor levels in decreasing order.}
-  \item{sig.level}{A vector of length 1 giving the level of significance of the test.}}
+  \item{groups}{A \code{vector} of length equal the number of factor levels marking the groups generated.}
+  \item{nms}{A \code{vector} of the labels of the factor levels.}
+  \item{ord}{A \code{vector} which keeps the position of the means of the factor levels in decreasing order.}
+  \item{m.inf}{A \code{matrix} which keeps the means and the dispersion of the factor levels in decreasing order.}
+  \item{sig.level}{A \code{vector} of length 1 giving the level of significance of the test.}
+}
 
 \author{
   Enio Jelihovschi (\email{eniojelihovs@gmail.com})\cr
-  Jose Claudio Faria (\email{joseclaudio.faria@gmail.com})\cr
-  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr}
+  José Cláudio Faria (\email{joseclaudio.faria@gmail.com})\cr
+  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr
+}
 
 \references{
-  Ramalho M.A.P., Ferreira D.F., Oliveira A.C. 2000. \emph{Experimentacao em Genetica
+  Ramalho M.A.P., Ferreira D.F., Oliveira A.C. 2000. \emph{Experimentação em Genética
   e Melhoramento de Plantas}. Editora UFLA.
 
   Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
-  analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.}
+  analysis of variance. \emph{Biometrics}, \bold{30}, 507-512.
+}
 
 \examples{
   ##
@@ -101,7 +116,8 @@
   sk2 <- with(CRD2,
               SK(x=dfm,
                  model='y ~ x',
-                 which='x'))
+                 which='x',
+                 dispersion='s'))
   summary(sk2)
   plot(sk2,
        col=rainbow(max(sk2$groups)),
@@ -116,7 +132,8 @@
   
   sk3 <- with(CRD2,
               SK(x=av,
-              which='x'))
+                 which='x',
+                 dispersion='se'))
   summary(sk3)
   plot(sk3,
        col=rainbow(max(sk3$groups)),
@@ -190,7 +207,8 @@
   sk3 <- SK(av,
             which='tra')
   summary(sk3)
-  plot(sk3, title='Factor levels')
+  plot(sk3,
+       title='Factor levels')
 
   ##
   ## Example: Factorial Experiment (FE)

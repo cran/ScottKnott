@@ -2,18 +2,22 @@
 \alias{FE}
 
 \title{
-  Factorial Experiment (FE)}
+  Factorial Experiment (FE)
+}
 
 \description{
-  A \code{list} illustrating  the resources of \code{ScottKnott} package
-  related to Factorial Experiment (FE).}
+  A \code{list} illustrating  the resources of \pkg{ScottKnott} package
+  related to Factorial Experiment (\samp{FE}).
+}
 
 \usage{
   data(FE)
-  FE}
+  FE
+}
 
 \details{
-  A simulated data to model a Factorial Experiment (FE) with 3 factors, 
-  2 levels per factor and 4 blocks.}
+  A simulated data to model a Factorial Experiment (\samp{FE}) with 3 factors, 
+  2 levels per factor and 4 blocks.
+}
 
 \keyword{datasets}

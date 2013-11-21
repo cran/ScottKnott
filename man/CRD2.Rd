@@ -2,18 +2,22 @@
 \alias{CRD2}
 
 \title{
-  Completely Randomized Design (CRD)}
+  Completely Randomized Design (CRD)
+}
 
 \description{
-  A \code{list}illustrating the resources of \code{ScottKnott} package
-  related to Completely Randomized Design (CRD).}
+  A \code{list} illustrating the resources of \pkg{ScottKnott} package
+  related to Completely Randomized Design (\samp{CRD}).
+}
 
 \usage{
   data(CRD2)
-  CRD2}
+  CRD2
+}
 
 \details{
-  A simulated data to model a Completely Randomized Design (CRD) of 45 
-  factor levels and 4 repetitions.}
+  A simulated data to model a Completely Randomized Design (\samp{CRD}) of 45 
+  factor levels and 4 repetitions.
+}
 
 \keyword{datasets}

@@ -21,7 +21,8 @@ plot(sk1)
 sk2 <- with(RCBD,
             SK(x=dfm,
                model='y ~ blk + tra',
-               which='tra'))
+               which='tra',
+               dispersion='s'))
 summary(sk2)
 plot(sk2,
      mm.lty=3,
