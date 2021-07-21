@@ -1,3 +1,14 @@
+2021-06-17 vs. 1.3.0 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
+  * Fixed the Version, Date and Description items of the DESCRIPTION file.
+
+2020-10-05 vs. 1.2.9 - José Cláudio Faria <ivanalaman@gmail.com>
+  * All documentation was corrected.
+
+2020-10-02 vs. 1.2.8 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
+  * New method to unbalanced data.
+  * Added methods to formula, lm and lmerMod class.
+  * All documentation was corrected.
+
 2018-06-07 vs. 1.2-7 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * New corrections in the documentation of accordance with the premises of cran
 
