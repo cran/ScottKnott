@@ -54,7 +54,7 @@
 
 \author{
  Enio Jelihovschi (\email{eniojelihovs@gmail.com})\cr
- José Cláudio Faria (\email{joseclaudio.faria@gmail.com})\cr
+ Jose Claudio Faria (\email{joseclaudio.faria@gmail.com})\cr
  Ivan Bezerra Allaman (\email{ivanalaman@gmail.com})\cr
 }
 
@@ -92,7 +92,7 @@
  PraeclaraOrchidaceae.
  \emph{American Midland Naturalist}, \bold{1491}, 104-120.
 
- Ramalho M.A.P., Ferreira DF, Oliveira AC 2000. \emph{Experimentação em Genética
+ Ramalho M.A.P., Ferreira DF, Oliveira AC 2000. \emph{Experimentacao em Genetica
   e Melhoramento de Plantas}. Editora UFLA.
 
  Scott R.J., Knott M. 1974. A cluster analysis method for grouping mans in the
