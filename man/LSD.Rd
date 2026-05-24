@@ -6,7 +6,7 @@
 }
 
 \description{
-  A \code{list} illustrating  the resources of \pkg{ScottKnott} package
+  A \code{list} illustrating the resources of \pkg{ScottKnott} package
   related to Latin Squares Design (\samp{LSD}).
 }
 
@@ -16,8 +16,8 @@
 }
 
 \details{
-  A simulated data to model a Latin Squares Design (\samp{LSD}) with  5
-  factor levels 5 rows and 5 columns.
+  Simulated data for a Latin Squares Design (\samp{LSD}) with 5 treatment
+  levels, 5 rows, and 5 columns.
 }
 
 \keyword{datasets}
